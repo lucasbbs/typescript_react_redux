@@ -15,8 +15,10 @@ class _App extends React.Component<AppProps, AppState> {
   };
 
   renderList(): JSX.Element[] | undefined {
-    return this.props.todos?.map((todo: Todo) => (
-      <div key={todo.id}>{todo.title}</div>
+    return this.props.todos?.map((todo: Todo, index: number) => (
+      <div key={todo.id}>
+        {index} - {todo.title}
+      </div>
     ));
   }
 
