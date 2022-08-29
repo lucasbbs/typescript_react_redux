@@ -11,15 +11,11 @@ export interface Todo {
   completed: boolean;
 }
 
-// interface FetchTodosAction {
-//   type: ActionTypes.fetchTodos;
-//   payload: Todo[];
-// }
-
 export interface IAction<T extends ActionTypes, P> {
   type: T;
   payload: P;
 }
+
 export const fetchTodos = () => {
   return async (dispatch: Dispatch) => {
     const response = await axios.get<Todo[]>(url);
@@ -27,5 +23,14 @@ export const fetchTodos = () => {
       type: ActionTypes.fetchTodos,
       payload: response.data,
     });
+  };
+};
+
+export const deleteTodo = (
+  id: number
+): IAction<ActionTypes.deleteTodo, number> => {
+  return {
+    type: ActionTypes.deleteTodo,
+    payload: id,
   };
 };
