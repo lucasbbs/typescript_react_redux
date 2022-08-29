@@ -5,17 +5,27 @@ import { ActionTypes } from './types';
 const url = 'https://jsonplaceholder.typicode.com/todos';
 
 interface Todo {
-  data: { userId: number; id: number; title: string; completed: boolean };
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
 }
 
-interface CustomDispatch extends Dispatch {
-  type: string;
-  payload: Todo;
-}
+// interface FetchTodosAction {
+//   type: ActionTypes.fetchTodos;
+//   payload: Todo[];
+// }
 
+export interface IAction<T extends ActionTypes, P> {
+  type: T;
+  payload: P;
+}
 export const fetchTodos = () => {
   return async (dispatch: Dispatch) => {
     const response = await axios.get<Todo[]>(url);
-    dispatch({ type: ActionTypes.fetchTodos, payload: response.data });
+    dispatch<IAction<ActionTypes, Todo[]>>({
+      type: ActionTypes.fetchTodos,
+      payload: response.data,
+    });
   };
 };
