@@ -4,8 +4,8 @@ import { Todo, fetchTodos, deleteTodo } from '../actions';
 import { StoreState } from '../reducers';
 
 interface AppProps {
-  todos?: Todo[];
-  fetchTodos(): typeof fetchTodos;
+  todos: Todo[];
+  fetchTodos: typeof fetchTodos;
   deleteTodo: typeof deleteTodo;
 }
 interface AppState {}
@@ -15,17 +15,17 @@ class _App extends React.Component<AppProps, AppState> {
     this.props.fetchTodos();
   };
 
-  renderList(): JSX.Element[] | undefined {
-    return this.props.todos?.map((todo: Todo) => (
+  onTodoClick = (id: number): void => {
+    this.props.deleteTodo(id);
+  };
+
+  renderList(): JSX.Element[] {
+    return this.props.todos.map((todo: Todo) => (
       <div onClick={() => this.onTodoClick(todo.id)} key={todo.id}>
         {todo.id} - {todo.title}
       </div>
     ));
   }
-
-  onTodoClick = (id: number): void => {
-    this.props.deleteTodo(id);
-  };
 
   render() {
     return (

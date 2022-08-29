@@ -26,12 +26,13 @@ export interface IAction<T extends ActionTypes, P> {
   payload: P;
 }
 
-export const fetchTodos = () => {
+export const fetchTodos = (): Function => {
   return async (dispatch: Dispatch) => {
-    const response = await axios.get<Todo[]>(url);
+    const res = await axios.get<Todo[]>(url);
+
     dispatch<IAction<ActionTypes, Todo[]>>({
       type: ActionTypes.fetchTodos,
-      payload: response.data,
+      payload: res.data,
     });
   };
 };
