@@ -11,6 +11,16 @@ export interface Todo {
   completed: boolean;
 }
 
+export interface FetchTodosAction {
+  type: ActionTypes.fetchTodos;
+  payload: Todo[];
+}
+
+export interface DeleteTodoAction {
+  type: ActionTypes.deleteTodo;
+  payload: number;
+}
+
 export interface IAction<T extends ActionTypes, P> {
   type: T;
   payload: P;
