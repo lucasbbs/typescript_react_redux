@@ -10,13 +10,23 @@ interface AppProps {
 interface AppState {}
 
 class _App extends React.Component<AppProps, AppState> {
-  constructor(props: AppProps) {
-    super(props);
-    this.state = { counter: 0 };
+  onButtonClick = (): void => {
+    this.props.fetchTodos();
+  };
+
+  renderList(): JSX.Element[] | undefined {
+    return this.props.todos?.map((todo: Todo) => (
+      <div key={todo.id}>{todo.title}</div>
+    ));
   }
 
   render() {
-    return <div>{console.log('Hello There')} </div>;
+    return (
+      <div>
+        <button onClick={this.onButtonClick}>Fetch</button>
+        {this.renderList()}
+      </div>
+    );
   }
 }
 
