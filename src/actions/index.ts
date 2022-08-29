@@ -4,7 +4,7 @@ import { ActionTypes } from './types';
 
 const url = 'https://jsonplaceholder.typicode.com/todos';
 
-interface Todo {
+export interface Todo {
   userId: number;
   id: number;
   title: string;
